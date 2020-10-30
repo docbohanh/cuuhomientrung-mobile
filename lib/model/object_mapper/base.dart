@@ -1,22 +1,31 @@
 import 'package:chmt/model/model.dart';
 
 class BaseResponse {
-  List data;
+  int count;
+  String next, previous;
+  List results;
 
-  BaseResponse({this.data});
+  BaseResponse({this.results});
+
+  BaseResponse.fromJson(Map<String, dynamic> json) {
+    count = json['count'];
+    next = json['next'];
+    previous = json['previous'];
+    results = json['results'];
+  }
 
   List<HouseHold> get houseHolds =>
-      data.map((e) => HouseHold.fromJson(e)).toList();
+      results.map((e) => HouseHold.fromJson(e)).toList();
 
   List<Province> get provinceList =>
-      data.map((e) => Province.fromJson(e)).toList();
+      results.map((e) => Province.fromJson(e)).toList();
 
   List<District> get districtList =>
-      data.map((e) => District.fromJson(e)).toList();
+      results.map((e) => District.fromJson(e)).toList();
 
   List<Commune> get communeList =>
-      data.map((e) => Commune.fromJson(e)).toList();
+      results.map((e) => Commune.fromJson(e)).toList();
 
   List<Rescuer> get rescuerList =>
-      data.map((e) => Rescuer.fromJson(e)).toList();
+      results.map((e) => Rescuer.fromJson(e)).toList();
 }

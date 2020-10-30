@@ -7,6 +7,9 @@ abstract class RescueObject {
   String name, location, phone, note;
   String _updateTime, _createTime;
 
+  String provinceName, districtName, communeName, statusName;
+  double longitude, latitude;
+
   int get province => _province ?? -1;
   int get district => _district ?? -1;
   int get commune => _commune ?? -1;
@@ -22,6 +25,9 @@ class HouseHold implements RescueObject {
   int _province, _district, _commune, village, volunteer, rescue;
   String name, location, phone, note;
   String _updateTime, _createTime;
+
+  String provinceName, districtName, communeName, statusName;
+  double longitude, latitude;
 
   int get province => _province ?? -1;
   int get district => _district ?? -1;
@@ -53,6 +59,13 @@ class HouseHold implements RescueObject {
     village = json[r'thon'];
     volunteer = json[r'volunteer'];
     rescue = json[r'cuuho'];
+    provinceName = json[r'tinh_display'];
+    districtName = json[r'huyen_display'];
+    communeName = json[r'xa_display'];
+    statusName = json['status_display'];
+
+    longitude = json[r'geo_longtitude'];
+    latitude = json[r'geo_latitude'];
   }
 
   Map<String, dynamic> toJson() => {

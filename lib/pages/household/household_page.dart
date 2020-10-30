@@ -540,13 +540,15 @@ class _HouseHoldPage extends State<HouseHoldPage>
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text(
-          houseHoldCount.isNotEmpty
-              ? '$houseHoldCount ' + r'trường hợp'
-              : r'Cứu hộ miền Trung',
-          style: GoogleFonts.openSans(
-            fontSize: 17,
-            fontWeight: FontWeight.w600,
+        title: Center(
+          child: Text(
+            houseHoldCount.isNotEmpty
+                ? '$houseHoldCount ' + r'trường hợp'
+                : r'Cứu hộ miền Trung',
+            style: GoogleFonts.openSans(
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         actions: [

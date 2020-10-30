@@ -86,10 +86,12 @@ class HouseHoldViewModel extends LoadAppViewModel {
 
   void getHouseHoldList() {
     Map<String, dynamic> params = {
-      r'tinh': selectedProvince != null ? selectedProvince.id : null,
-      r'huyen': selectedDistrict != null ? selectedDistrict.id : null,
-      r'xa': selectedCommune != null ? selectedCommune.id : null,
-      r'status': status != null ? status : null,
+      r'tinh__pk__exact': selectedProvince != null ? selectedProvince.id : null,
+      r'huyen__pk__exact': selectedDistrict != null ? selectedDistrict.id : null,
+      r'xa__pk__exact': selectedCommune != null ? selectedCommune.id : null,
+      r'status__id__exact': status != null ? status : null,
+      'limit': 100,
+      'offset': 100
     };
 
     params.removeWhere((key, value) => value == null);

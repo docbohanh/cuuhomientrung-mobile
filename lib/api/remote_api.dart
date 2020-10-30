@@ -12,7 +12,7 @@ class RemoteAPI implements API {
   Future<BaseResponse> getHouseHoldList({Map<String, dynamic> params}) async {
     try {
       var res = await APIMethod.getData(APIPath.houseHold, params);
-      return BaseResponse(data: res as List);
+      return BaseResponse.fromJson(Map<String, dynamic>.from(res));
     } catch (e) {
       throw e;
     }
@@ -21,8 +21,8 @@ class RemoteAPI implements API {
   @override
   Future<BaseResponse> getCommuneList() async {
     try {
-      var res = await APIMethod.getData(APIPath.commune, {});
-      return BaseResponse(data: res as List);
+      var res = await APIMethod.getData(APIPath.commune, {'limit': 1000});
+      return BaseResponse.fromJson(Map<String, dynamic>.from(res));
     } catch (e) {
       throw e;
     }
@@ -31,8 +31,8 @@ class RemoteAPI implements API {
   @override
   Future<BaseResponse> getDistrictList() async {
     try {
-      var res = await APIMethod.getData(APIPath.district, {});
-      return BaseResponse(data: res as List);
+      var res = await APIMethod.getData(APIPath.district, {'limit': 1000});
+      return BaseResponse.fromJson(Map<String, dynamic>.from(res));
     } catch (e) {
       throw e;
     }
@@ -41,8 +41,10 @@ class RemoteAPI implements API {
   @override
   Future<BaseResponse> getProvinceList() async {
     try {
-      var res = await APIMethod.getData(APIPath.province, {});
-      return BaseResponse(data: res as List);
+      var res = await APIMethod.getData(APIPath.province, {
+        'limit': 1000
+      });
+      return BaseResponse.fromJson(Map<String, dynamic>.from(res));
     } catch (e) {
       throw e;
     }
@@ -52,7 +54,7 @@ class RemoteAPI implements API {
   Future<BaseResponse> getRescuerList({Map<String, dynamic> params}) async {
     try {
       var res = await APIMethod.getData(APIPath.rescuer, params);
-      return BaseResponse(data: res as List);
+      return BaseResponse.fromJson(Map<String, dynamic>.from(res));
     } catch (e) {
       throw e;
     }

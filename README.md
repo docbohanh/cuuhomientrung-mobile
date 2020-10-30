@@ -1,6 +1,6 @@
 # CHMT
 
-Ứng dụng di động tổng hợp thông tin cứu nạn, cứu hộ theo [cuuhomientrung.info](cuuhomientrung.info):
+Ứng dụng di động tổng hợp thông tin cứu nạn, cứu hộ theo [https://cuuhomientrung.info](https://cuuhomientrung.info):
 
 Feature:
 - [x] Xem danh sách các hộ cần ứng cứu

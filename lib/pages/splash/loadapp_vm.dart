@@ -69,24 +69,16 @@ class LoadAppViewModel extends BaseViewModel with ChangeNotifier {
   String getLandmark(RescueObject object) {
     var result = '';
 
-    try {
-      var province = provinceList.firstWhere((element) => element.id == object.province);
-      var district = allDistrict.firstWhere((element) => element.id == object.district);
-      var commune = allCommune.firstWhere((element) => element.id == object.commune);
+    if (object.provinceName.isNotEmpty) {
+      result += object.provinceName + ', ';
+    }
 
-      if (province != null) {
-        result += province.name + ', ';
-      }
+    if (object.districtName.isNotEmpty) {
+      result += object.districtName + ', ';
+    }
 
-      if (district != null) {
-        result += district.name + ', ';
-      }
-
-      if (commune != null) {
-        result += commune.name;
-      }
-    } catch (e) {
-      logger.info(e);
+    if (object.communeName.isNotEmpty) {
+      result += object.communeName;
     }
 
     return result;
