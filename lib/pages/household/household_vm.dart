@@ -86,19 +86,36 @@ class HouseHoldViewModel extends LoadAppViewModel {
 
   void getHouseHoldList() {
     Map<String, dynamic> params = {
-      r'tinh__pk__exact': selectedProvince != null ? selectedProvince.id : null,
-      r'huyen__pk__exact': selectedDistrict != null ? selectedDistrict.id : null,
-      r'xa__pk__exact': selectedCommune != null ? selectedCommune.id : null,
-      r'status__id__exact': status != null ? status : null,
-      'limit': 100,
-      'offset': 100
+      r'tinh': selectedProvince != null ? selectedProvince.id : null,
+      r'huyen': selectedDistrict != null ? selectedDistrict.id : null,
+      r'xa': selectedCommune != null ? selectedCommune.id : null,
+      r'status': status != null ? status : null,
+      'limit': 10000,
+      'offset': 0
     };
 
     params.removeWhere((key, value) => value == null);
 
     repo.getHouseHoldList(params: params).then((value) {
-      var list = value.houseHolds;
+      List<HouseHold> list = value.houseHolds;
       list.sort((a, b) => b.updateTime.compareTo(a.updateTime));
+
+      if (selectedProvince != null) {
+        list = list.where((e) => e.province == selectedProvince.id).toList();
+      }
+
+      if (selectedDistrict != null) {
+        list = list.where((e) => e.district == selectedDistrict.id).toList();
+      }
+
+      if (selectedCommune != null) {
+        list = list.where((e) => e.commune == selectedCommune.id).toList();
+      }
+
+      if (status != null) {
+        list = list.where((e) => e.status == status).toList();
+      }
+
       houseHoldChanged(list);
     }).catchError((e) {
       logger.info(e);

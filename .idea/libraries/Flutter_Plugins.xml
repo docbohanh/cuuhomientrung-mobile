@@ -1,19 +1,19 @@
 <component name="libraryTable">
   <library name="Flutter Plugins" type="FlutterPluginsLibraryType">
     <CLASSES>
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.21" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-0.0.4+1" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-0.0.1+1" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+4" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/flutter_config-1.0.7" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-0.1.5" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/connectivity_macos-0.1.0+5" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-0.0.1+1" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/connectivity-0.4.9+5" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-0.0.1+8" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/url_launcher-5.7.5" />
-      <root url="file://$USER_HOME$/.pub-cache/hosted/pub.dartlang.org/connectivity_for_web-0.3.1+2" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_macos-0.1.0+5" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_web-0.1.5" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher-5.7.5" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_config-1.0.7" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_macos-0.0.4+4" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_linux-0.0.1+2" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_windows-0.0.1+1" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity-0.4.9+5" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-1.6.21" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider_windows-0.0.4+1" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_linux-0.0.1+1" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/connectivity_for_web-0.3.1+2" />
+      <root url="file://$USER_HOME$/flutter/.pub-cache/hosted/pub.dartlang.org/url_launcher_macos-0.0.1+8" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

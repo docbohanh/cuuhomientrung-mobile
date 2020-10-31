@@ -21,7 +21,7 @@ class RemoteAPI implements API {
   @override
   Future<BaseResponse> getCommuneList() async {
     try {
-      var res = await APIMethod.getData(APIPath.commune, {'limit': 1000});
+      var res = await APIMethod.getData(APIPath.commune, {'limit': 10000});
       return BaseResponse.fromJson(Map<String, dynamic>.from(res));
     } catch (e) {
       throw e;
@@ -31,7 +31,7 @@ class RemoteAPI implements API {
   @override
   Future<BaseResponse> getDistrictList() async {
     try {
-      var res = await APIMethod.getData(APIPath.district, {'limit': 1000});
+      var res = await APIMethod.getData(APIPath.district, {'limit': 10000});
       return BaseResponse.fromJson(Map<String, dynamic>.from(res));
     } catch (e) {
       throw e;
@@ -41,9 +41,7 @@ class RemoteAPI implements API {
   @override
   Future<BaseResponse> getProvinceList() async {
     try {
-      var res = await APIMethod.getData(APIPath.province, {
-        'limit': 1000
-      });
+      var res = await APIMethod.getData(APIPath.province, {'limit': 10000});
       return BaseResponse.fromJson(Map<String, dynamic>.from(res));
     } catch (e) {
       throw e;

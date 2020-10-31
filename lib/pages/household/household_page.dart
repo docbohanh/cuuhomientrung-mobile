@@ -138,11 +138,15 @@ class _HouseHoldPage extends State<HouseHoldPage>
       });
     }
 
+    void notPermission() {
+      showMessage(text: r'Chức năng đang cập nhật');
+    }
+
     if (status != null) {
       Utility.showConfirmDialog(
         context,
         message: r'Bạn có chắc muốn cập nhật trạng thái không?',
-        onPressedOK: update,
+        onPressedOK: notPermission,
       );
     }
   }
