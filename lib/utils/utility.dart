@@ -27,7 +27,7 @@ class Utility {
           height: size,
           child: LoadingIndicator(
             indicatorType: Indicator.ballClipRotateMultiple,
-            color: Colors.blue,
+            color: Color(0xFF0b457c),
           ),
         ),
       );

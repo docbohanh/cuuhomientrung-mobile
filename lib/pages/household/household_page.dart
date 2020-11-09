@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:chmt/helper/search_box.dart';
 import 'package:chmt/helper/tab_header.dart';
 import 'package:chmt/model/model.dart';
+import 'package:chmt/pages/household/collapse.dart';
 import 'package:chmt/utils/utility.dart';
 import 'package:diacritic/diacritic.dart';
 import 'package:flutter/material.dart';
@@ -39,6 +40,13 @@ class HouseHoldPage extends StatefulWidget {
 
 class _HouseHoldPage extends State<HouseHoldPage>
     with TickerProviderStateMixin {
+  Animation animationIn, animationOut;
+
+  AnimationController _collapseAnimationController;
+
+  bool get isExpanded =>
+      _collapseAnimationController.status == AnimationStatus.completed;
+
   AnimationController animationController;
   ScrollController _scrollController = ScrollController();
   var searchEditingCtl = TextEditingController(text: '');
@@ -49,6 +57,20 @@ class _HouseHoldPage extends State<HouseHoldPage>
 
   @override
   void initState() {
+    _collapseAnimationController = AnimationController(
+      vsync: this,
+      value: 1.0,
+      duration: Duration(milliseconds: 222),
+    );
+    animationIn = CurvedAnimation(
+      parent: _collapseAnimationController,
+      curve: Curves.elasticIn,
+    );
+    animationOut = CurvedAnimation(
+      parent: _collapseAnimationController,
+      curve: Curves.elasticOut,
+    );
+
     _initAnimation();
 
     super.initState();
@@ -59,8 +81,19 @@ class _HouseHoldPage extends State<HouseHoldPage>
     viewModel.houseHoldStream.listen((e) {
       setState(() {
         houseHoldCount = e.length.toString();
+        if (isExpanded) {
+          _toggleExpanded();
+        }
       });
     });
+  }
+
+  void _toggleExpanded() {
+    if (isExpanded) {
+      _collapseAnimationController.reverse();
+    } else {
+      _collapseAnimationController.forward();
+    }
   }
 
   void _reload() {
@@ -119,6 +152,8 @@ class _HouseHoldPage extends State<HouseHoldPage>
   void _updateHouseHoldStatus(HouseHold item) async {
     final status = await statusChange(allStatus);
 
+    bool allowUpdateStatus = false;
+
     void update() {
       var newItem = item;
       newItem.status = status;
@@ -139,7 +174,11 @@ class _HouseHoldPage extends State<HouseHoldPage>
     }
 
     void notPermission() {
-      showMessage(text: r'Chức năng đang cập nhật');
+      if (allowUpdateStatus) {
+        update();
+      } else {
+        showMessage(text: r'Chức năng đang cập nhật');
+      }
     }
 
     if (status != null) {
@@ -198,11 +237,7 @@ class _HouseHoldPage extends State<HouseHoldPage>
                       SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
-                            return Container(
-                              color: Color(0xFFFEFEFE),
-                              padding: EdgeInsets.fromLTRB(16, 16, 16, 0),
-                              child: _filterBar(),
-                            );
+                            return SizedBox();
                           },
                           childCount: 1,
                         ),
@@ -235,7 +270,7 @@ class _HouseHoldPage extends State<HouseHoldPage>
 
                       return ListView.builder(
                         itemCount: snapshot.data.length,
-                        padding: EdgeInsets.only(top: 4, bottom: 80),
+                        padding: EdgeInsets.only(top: 10, bottom: 80),
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
                           var count = snapshot.data.length;
@@ -273,6 +308,41 @@ class _HouseHoldPage extends State<HouseHoldPage>
             ],
           ),
         ),
+        Positioned(
+          child: GestureDetector(
+            onTap: () => _toggleExpanded(),
+            child: Container(
+              width: 40,
+              height: 50,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                color: Color(0xFF0b457c),
+              ),
+              child: Center(
+                child: Text(
+                  r"LỌC",
+                  style: GoogleFonts.merriweather(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w700,
+                      fontSize: 14,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          top: 16.5,
+          left: 16,
+        ),
+        Positioned(
+          child: CollapseAnimation(
+            animation: isExpanded ? animationOut : animationIn,
+            child: Container(
+              child: _filterBar(),
+              color: Colors.white,
+              padding: EdgeInsets.fromLTRB(16, 0, 16, 0),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -286,12 +356,13 @@ class _HouseHoldPage extends State<HouseHoldPage>
           onPressed: () => _refresh(),
           child: Text(
             r"LỌC",
-            style: TextStyle(
-              color: Colors.black54,
-              fontWeight: FontWeight.w500,
+            style: GoogleFonts.merriweather(
+              color: Colors.white,
+              fontWeight: FontWeight.w700,
+              fontSize: 14
             ),
           ),
-          color: Colors.amber,
+          color: Color(0xFF0b457c),
           size: GFSize.SMALL,
         ),
         GFButton(
@@ -367,6 +438,13 @@ class _HouseHoldPage extends State<HouseHoldPage>
             color: Colors.white,
           ),
           color: Colors.blue,
+          size: GFSize.SMALL,
+        ),
+        GFButton(
+          padding: EdgeInsets.symmetric(horizontal: 4),
+          onPressed: () => _toggleExpanded(),
+          child: Text('Ẩn'),
+          color: Color(0xFF0b457c),
           size: GFSize.SMALL,
         ),
       ],
