@@ -70,7 +70,7 @@ class HouseHoldItemView extends StatelessWidget {
                     style: GoogleFonts.roboto(
                       color: Colors.blueGrey,
                       fontWeight: FontWeight.w400,
-                      fontSize: 12,
+                      fontSize: 13,
                     ),
                   )
                 ],

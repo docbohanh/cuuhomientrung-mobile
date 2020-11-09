@@ -135,7 +135,7 @@ class _HomeDrawerState extends State<HomeDrawer> {
               child: GestureDetector(
                 onTap: () => Utility.launchURL(context, url: AppGlobal.baseUrl),
                 child: Container(
-                  padding: EdgeInsets.only(left: 10, top: 5, right: 8),
+                  padding: EdgeInsets.only(left: 10, top: 10, right: 8),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -152,14 +152,14 @@ class _HomeDrawerState extends State<HomeDrawer> {
                             fontSize: 16.0,
                             fontWeight: FontWeight.w600,
                             letterSpacing: 0.05,
-                            color: Colors.blue,
+                            color: Color(0xFF0b457c),
                           ),
                         ),
                       ),
                       Container(
 //                        width: calculateUserWidgetWidth,
                         child: Text(
-                          r'cuuhomientrung.info',
+                          r' https://cuuhomientrung.info/',
                           overflow: TextOverflow.fade,
                           style: GoogleFonts.lato(
                             fontSize: 13.0,
@@ -208,28 +208,39 @@ class _HomeDrawerState extends State<HomeDrawer> {
                 child: InkWell(
                   splashColor: Colors.grey.withOpacity(0.1),
                   highlightColor: Colors.transparent,
-                  onTap: () => Utility.launchURL(context, url: AppGlobal.baseUrl),
+                  onTap: () => Utility.launchURL(context, url: r'tel:18006132'),
                   child: Stack(
                     children: <Widget>[
                       Container(
                         padding: EdgeInsets.all(16),
                         child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Icon(
-                              Icons.link,
-                              color: Colors.blue,
+                              Icons.phone,
+                              color: Color(0xFF0b457c),
                             ),
                             SizedBox(width: 10),
-                            Text(
-                              'CHMT',
-                              style: GoogleFonts.lato(
-                                fontSize: 17.0,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.blue,
+                            RichText(
+                              text: TextSpan(
+                                text: r'Hotline: ',
+                                style: GoogleFonts.merriweather(
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.w400,
+                                  color: Color(0xFF0b457c),
+                                ),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: '1800 6132',
+                                    style: GoogleFonts.merriweather(
+                                      fontSize: 22.0,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.green,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              textAlign: TextAlign.left,
-                            )
+                            ),
                           ],
                         ),
                       ),
