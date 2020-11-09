@@ -54,12 +54,26 @@ class HouseHoldItemView extends StatelessWidget {
             SizedBox(width: 5),
             Padding(
               padding: EdgeInsets.only(top: 2.5),
-              child: GestureDetector(
-                onTap: () => statusCallback(),
-                child: StatusView(
-                  status: '${item.status.statusString}',
-                  color: item.status.statusColor,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () => statusCallback(),
+                    child: StatusView(
+                      status: '${item.status.statusString}',
+                      color: item.status.statusColor,
+                    ),
+                  ),
+                  SizedBox(height: 4),
+                  Text(
+                    '${DateFormat('HH:mm dd/MM/yy').format(item.updateTime)}',
+                    style: GoogleFonts.roboto(
+                      color: Colors.blueGrey,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 12,
+                    ),
+                  )
+                ],
               ),
             )
           ],
@@ -130,39 +144,6 @@ class HouseHoldItemView extends StatelessWidget {
           ],
         ),
       ),
-      SizedBox(height: 5),
-      Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          Expanded(
-            child: RichText(
-              text: TextSpan(
-                text: r"Ngày cập nhật: ",
-                style: subStyle,
-                children: <TextSpan>[
-                  TextSpan(
-                    text: '${DateFormat('dd/MM/yy HH:mm').format(item.updateTime)}',
-                    style: GoogleFonts.roboto(
-                      color: color,
-                      fontWeight: FontWeight.w500,
-                      fontSize: 15,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(width: 5),
-          // InkWell(
-          //   child: Padding(
-          //     padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-          //     child: Icon(Icons.delete_forever, color: Colors.red),
-          //   ),
-          //   onTap: () => deleteCallback(),
-          // )
-        ],
-      )
     ];
 
     return AnimatedBuilder(

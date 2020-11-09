@@ -38,6 +38,8 @@ class HouseHold implements RescueObject {
     return removeDiacritics(searchQuery).toLowerCase();
   }
 
+  bool get isValid => name.isNotEmpty && phone.isNotEmpty;
+
   void setUpdateTime(DateTime dateTime) {
     _updateTime = dateTime.toIso8601String();
   }
