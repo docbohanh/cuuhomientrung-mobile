@@ -51,6 +51,10 @@ class _HouseHoldPage extends State<HouseHoldPage>
   ScrollController _scrollController = ScrollController();
   var searchEditingCtl = TextEditingController(text: '');
 
+  var nameEditingCtl = TextEditingController(text: '');
+  var phoneEditingCtl = TextEditingController(text: '');
+  var locationEditingCtl = TextEditingController(text: '');
+
   final viewModel = HouseHoldViewModel();
 
   final List<int> allStatus = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -60,15 +64,15 @@ class _HouseHoldPage extends State<HouseHoldPage>
     _collapseAnimationController = AnimationController(
       vsync: this,
       value: 1.0,
-      duration: Duration(milliseconds: 222),
+      duration: Duration(milliseconds: 300),
     );
     animationIn = CurvedAnimation(
       parent: _collapseAnimationController,
-      curve: Curves.elasticIn,
+      curve: Curves.fastLinearToSlowEaseIn,
     );
     animationOut = CurvedAnimation(
       parent: _collapseAnimationController,
-      curve: Curves.elasticOut,
+      curve: Curves.fastLinearToSlowEaseIn,
     );
 
     _initAnimation();
@@ -124,19 +128,19 @@ class _HouseHoldPage extends State<HouseHoldPage>
     animationController.dispose();
   }
 
-  void _querySubmitted(String query) {
-    List<HouseHold> result = List<HouseHold>();
-
-    if (query.isEmpty) {
-      result = viewModel.houseHoldList;
-    } else {
-      result = viewModel.houseHoldList.where((e) {
-        return e.searchText.contains(removeDiacritics(query).toLowerCase());
-      }).toList();
-    }
-
-    viewModel.houseHoldChanged(result);
-  }
+  // void _querySubmitted(String query) {
+  //   List<HouseHold> result = List<HouseHold>();
+  //
+  //   if (query.isEmpty) {
+  //     result = viewModel.houseHoldList;
+  //   } else {
+  //     result = viewModel.houseHoldList.where((e) {
+  //       return e.searchText.contains(removeDiacritics(query).toLowerCase());
+  //     }).toList();
+  //   }
+  //
+  //   viewModel.houseHoldChanged(result);
+  // }
 
   void showMessage({String text = r'Đang cập nhật'}) {
     _scaffoldKey.currentState.hideCurrentSnackBar();
@@ -177,7 +181,7 @@ class _HouseHoldPage extends State<HouseHoldPage>
       if (allowUpdateStatus) {
         update();
       } else {
-        showMessage(text: r'Chức năng đang cập nhật');
+        showMessage(text: r'Not permission');
       }
     }
 
@@ -246,16 +250,16 @@ class _HouseHoldPage extends State<HouseHoldPage>
                         pinned: true,
                         floating: true,
                         delegate: ContestTabHeader(
-                            height: 76,
+                            height: 50,
                             child: Container(
                               color: Color(0xFFFEFEFE),
-                              height: 76,
                               child: SearchBox(
                                 cursorColor: Color(0xFF01477f),
                                 textColor: Color(0xFF01477f),
                                 controller: searchEditingCtl,
                                 onChanged: (q) {},
-                                onSubmitted: _querySubmitted,
+                                onSubmitted: (q) =>
+                                    viewModel.searchHouseHoldList(query: q),
                               ),
                             )),
                       ),
@@ -270,7 +274,7 @@ class _HouseHoldPage extends State<HouseHoldPage>
 
                       return ListView.builder(
                         itemCount: snapshot.data.length,
-                        padding: EdgeInsets.only(top: 10, bottom: 80),
+                        padding: EdgeInsets.only(top: 4, bottom: 80),
                         scrollDirection: Axis.vertical,
                         itemBuilder: (context, index) {
                           var count = snapshot.data.length;
@@ -312,26 +316,25 @@ class _HouseHoldPage extends State<HouseHoldPage>
           child: GestureDetector(
             onTap: () => _toggleExpanded(),
             child: Container(
-              width: 40,
-              height: 50,
+              width: 42,
+              height: 49,
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5.0)),
-                color: Color(0xFF0b457c),
+                // borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                boxShadow: <BoxShadow>[
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    blurRadius: 5,
+                  ),
+                ],
+                color: Colors.blue,
               ),
               child: Center(
-                child: Text(
-                  r"LỌC",
-                  style: GoogleFonts.merriweather(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w700,
-                      fontSize: 14,
-                  ),
-                ),
+                child: Icon(Icons.filter_alt_outlined, color: Colors.white),
               ),
             ),
           ),
-          top: 16.5,
-          left: 16,
+          top: 0,
+          left: 0,
         ),
         Positioned(
           child: CollapseAnimation(
@@ -357,10 +360,7 @@ class _HouseHoldPage extends State<HouseHoldPage>
           child: Text(
             r"LỌC",
             style: GoogleFonts.merriweather(
-              color: Colors.white,
-              fontWeight: FontWeight.w700,
-              fontSize: 14
-            ),
+                color: Colors.white, fontWeight: FontWeight.w700, fontSize: 14),
           ),
           color: Color(0xFF0b457c),
           size: GFSize.SMALL,
@@ -634,16 +634,113 @@ class _HouseHoldPage extends State<HouseHoldPage>
           ),
         ),
         actions: [
-          IconButton(
-            icon: Icon(Icons.replay),
-            onPressed: () {
-              Utility.hideKeyboardOf(context);
-              _reload();
-            },
+          Tooltip(
+            message: r'Nạp lại',
+            child: IconButton(
+              icon: Icon(Icons.replay),
+              onPressed: () {
+                Utility.hideKeyboardOf(context);
+                searchEditingCtl.clear();
+                _reload();
+              },
+            ),
           )
         ],
       ),
       body: _body(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          nameEditingCtl.clear();
+          phoneEditingCtl.clear();
+          locationEditingCtl.clear();
+
+          showDialog<String>(
+            context: context,
+            builder: (ctx) {
+              var textColor = Color(0xFF0b457c);
+
+              return SimpleDialog(
+                title: Text(
+                  r'Tìm kiếm nâng cao',
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.openSans(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                      color: textColor,),
+                ),
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(height: 10),
+                      Container(
+                        child: Column(
+                          children: [
+                            SearchBox(
+                              showPrefixIcon: false,
+                              cursorColor: Color(0xFF01477f),
+                              textColor: Color(0xFF01477f),
+                              controller: nameEditingCtl,
+                              onChanged: (q) {},
+                              onSubmitted: (q) {},
+                              hintText: 'Hộ dân',
+                            ),
+                            SearchBox(
+                              showPrefixIcon: false,
+                              cursorColor: Color(0xFF01477f),
+                              textColor: Color(0xFF01477f),
+                              controller: phoneEditingCtl,
+                              onChanged: (q) {},
+                              onSubmitted: (q) {},
+                              hintText: r'Số điện thoại',
+                            ),
+                            SearchBox(
+                              showPrefixIcon: false,
+                              cursorColor: Color(0xFF01477f),
+                              textColor: Color(0xFF01477f),
+                              controller: locationEditingCtl,
+                              onChanged: (q) {},
+                              onSubmitted: (q) {},
+                              hintText: 'Địa chỉ',
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 16),
+                      Container(
+                        width: 130,
+                        child: Center(
+                          child: RaisedButton(
+                            color: textColor,
+                            onPressed: () {
+                              Navigator.pop(context);
+                              viewModel.advanceSearchHouseHoldList(
+                                name: nameEditingCtl.text,
+                                phone: phoneEditingCtl.text,
+                                location: locationEditingCtl.text
+                              );
+                            },
+                            child: Row(
+                              children: [
+                                Icon(Icons.search, color: Colors.white),
+                                Text(r'Tìm kiếm',
+                                    style: TextStyle(color: Colors.white))
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              );
+            },
+          );
+        },
+        tooltip: r'Tìm kiếm nâng cao',
+        child: Icon(Icons.flip),
+      ),
     );
   }
 }

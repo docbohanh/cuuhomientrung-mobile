@@ -8,6 +8,7 @@ class SearchBox extends StatefulWidget {
   final ValueChanged<String> onChanged;
   final ValueChanged<String> onSubmitted;
   final Function searchAction;
+  final bool showPrefixIcon;
 
   const SearchBox({
     this.searchAction,
@@ -17,6 +18,7 @@ class SearchBox extends StatefulWidget {
     this.onChanged,
     this.onSubmitted,
     this.hintText = r"Tìm kiếm",
+    this.showPrefixIcon = true,
   });
 
   @override
@@ -34,16 +36,15 @@ class SearchBoxState extends State<SearchBox> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(16, 16, 16, 8),
       padding: EdgeInsets.only(top: 2),
       decoration: BoxDecoration(
         color: Colors.white,
-        boxShadow: <BoxShadow>[
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.3),
-            blurRadius: 5,
-          ),
-        ],
+        // boxShadow: <BoxShadow>[
+        //   BoxShadow(
+        //     color: Colors.grey.withOpacity(0.3),
+        //     blurRadius: 5,
+        //   ),
+        // ],
         borderRadius: BorderRadius.all(Radius.circular(5.0)),
         border: Border.all(
           width: 0.5,
@@ -72,10 +73,10 @@ class SearchBoxState extends State<SearchBox> {
               onTap: widget.searchAction,
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 4),
-                child: Icon(
+                child: widget.showPrefixIcon ? Icon(
                   Icons.search,
                   color: widget.textColor,
-                ),
+                ) : SizedBox(),
               ),
             ),
             border: InputBorder.none,

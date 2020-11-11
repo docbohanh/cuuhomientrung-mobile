@@ -1,6 +1,6 @@
 Ứng dụng di động tổng hợp thông tin cứu nạn, cứu hộ theo [cuuhomientrung.info](cuuhomientrung.info):
 
-Feature:
+## Feature:
 - [x] Xem danh sách các hộ cần ứng cứu
 - [x] Xem danh sách các đội cứu hộ
 - [x] Tìm kiếm theo từ khóa
@@ -10,7 +10,7 @@ Feature:
 - [x] Lọc theo các trạng thái cứu hộ
 
 
-TODO:
+## TODO:
 - [ ] Cập nhật trạng thái
 - [ ] Thêm sửa xóa các đối tượng
 
@@ -21,3 +21,14 @@ Testing
  <p align="center">
   <img src="https://user-images.githubusercontent.com/5656118/96705371-650d8c00-13bf-11eb-9c1f-67bec556c351.png" width="300" >
 </p>
+
+## How to run
+- Với android, để chạy đúng môi trường cần chọn main_prod hoặc main_staging
+
+## How to build
+### iOS
+> flutter build ios --release
+- Mở Xcode -> Archive ...
+
+### android
+> flutter build apk --flavor production  --split-per-abi

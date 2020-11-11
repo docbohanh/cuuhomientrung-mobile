@@ -8,6 +8,7 @@ class CollapseAnimation extends AnimatedWidget {
   );
 
   final Widget child;
+  final Tween tween = Tween<double>(begin: 0, end: 96);
 
   @override
   StatefulElement createElement() {
@@ -17,12 +18,11 @@ class CollapseAnimation extends AnimatedWidget {
   @override
   Widget build(BuildContext context) {
     Animation<double> animation = listenable;
-    Tween tween = Tween<double>(begin: 0, end: MediaQuery.of(context).size.width);
 
     var animationValue = tween.evaluate(animation);
-    double width = animationValue >= 0.0 ? animationValue : 0.0;
+    double height = animationValue >= 0.0 ? animationValue : 0.0;
     return Container(
-      width: width,
+      height: height,
       child: child,
     );
   }

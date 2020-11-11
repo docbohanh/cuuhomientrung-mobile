@@ -135,10 +135,9 @@ class _RescuerPage extends State<RescuerPage>
                         pinned: true,
                         floating: true,
                         delegate: ContestTabHeader(
-                            height: 76,
+                            height: 50,
                             child: Container(
                               color: Color(0xFFFEFEFE),
-                              height: 76,
                               child: SearchBox(
                                 cursorColor: Color(0xFF01477f),
                                 textColor: Color(0xFF01477f),

@@ -82,7 +82,7 @@ class HouseHoldViewModel extends LoadAppViewModel {
       selectedCommuneChanged(null);
     });
 
-    statusChanged(1); /// Lọc mặc định theo hộ cần ứng cứu gấp
+    // statusChanged(1); /// Lọc mặc định theo hộ cần ứng cứu gấp
   }
 
   @override
@@ -105,7 +105,7 @@ class HouseHoldViewModel extends LoadAppViewModel {
       r'huyen': selectedDistrict != null ? selectedDistrict.id : null,
       r'xa': selectedCommune != null ? selectedCommune.id : null,
       r'status': status != null ? status : null,
-      'limit': 10000,
+      'limit': 100000,
       'offset': 0
     };
 
@@ -136,6 +136,44 @@ class HouseHoldViewModel extends LoadAppViewModel {
       logger.info(e);
       houseHoldChanged([]);
     });
+  }
+
+  void searchHouseHoldList({String query = ''}) {
+    Map<String, dynamic> params = {
+      r'search': query,
+      'limit': 100000,
+      'offset': 0
+    };
+
+    params.removeWhere((key, value) => value == null);
+
+    repo.getHouseHoldList(params: params).then((value) => _processList(value)).catchError((e) {
+      logger.info(e);
+      houseHoldChanged([]);
+    });
+  }
+
+  void advanceSearchHouseHoldList({String name = '', String phone = '', String location = ''}) {
+    Map<String, dynamic> params = {
+      'name': name,
+      'phone': phone,
+      'location': location,
+      'limit': 100000,
+      'offset': 0
+    };
+
+    params.removeWhere((key, value) => value == null);
+
+    repo.getHouseHoldList(params: params).then((value) => _processList(value)).catchError((e) {
+      logger.info(e);
+      houseHoldChanged([]);
+    });
+  }
+  
+  void _processList(BaseResponse value) {
+    List<HouseHold> list = value.houseHolds.where((e) => e.isValid).toList();
+    list.sort((a, b) => b.updateTime.compareTo(a.updateTime));
+    houseHoldChanged(list);
   }
 
   @override

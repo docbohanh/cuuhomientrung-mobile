@@ -42,7 +42,7 @@ class APIMethod {
 
       Response res = await _dio.get(subPath, queryParameters: params);
 
-      logger.info(res.request.baseUrl);
+      logger.info(subPath);
       logger.info(res.request.queryParameters);
       logger.info('>>>$subPath<<< RESPONSE: ${res.data}');
 
