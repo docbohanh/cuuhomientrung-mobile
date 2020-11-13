@@ -56,7 +56,7 @@ APP_NAME=CHMT
 
 ### iOS
 > flutter build ios --release
-- Mở Xcode -> Archive ...
+- Mở Xcode -> Product -> Archive ...
 
 ### android
 > flutter build apk --flavor production  --split-per-abi
