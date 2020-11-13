@@ -22,7 +22,7 @@
 - Google Play Store: [CHMT](https://play.google.com/store/apps/details?id=info.cuuhomientrung.chmt)
 - iOS Beta Testflight: [https://testflight.apple.com/join/jMgpk8E3](https://testflight.apple.com/join/jMgpk8E3)
 
-<p align="center">
+<p>
   <img src="https://user-images.githubusercontent.com/5656118/98765030-b8e42180-240f-11eb-99d3-4894d73fc548.png" width="300" >
   <img src="https://user-images.githubusercontent.com/5656118/98765068-cef1e200-240f-11eb-9e21-681a478ec996.png" width="300" >
 </p>
