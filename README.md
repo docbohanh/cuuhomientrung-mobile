@@ -45,7 +45,7 @@ APP_NAME=CHMT
 - Với iOS, để run staging thì bạn phải tạo thêm schema staging:
 <img src="https://user-images.githubusercontent.com/5656118/99027398-b57fa000-259f-11eb-90e9-931cfc308afa.png" width="800" >
 
-- Với Android, bạn chọn file main để chạy tương ứng:
+- Với Android, bạn chọn file main tương ứng để chạy:
 <img src="https://user-images.githubusercontent.com/5656118/99027445-d8aa4f80-259f-11eb-8e80-6eca6791eea0.png" width="300" >
 
 ```
