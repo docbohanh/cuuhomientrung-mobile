@@ -39,7 +39,7 @@ APP_NAME=CHMT
 - Để có token vui lòng liên hệ team trên [slack](https://cuuhomientrung.slack.com/), hoặc pm huuthanhla@gmail.com.
 
 - Với iOS, để run staging thì bạn phải tạo thêm schema staging:
-<img src="https://user-images.githubusercontent.com/5656118/99027398-b57fa000-259f-11eb-90e9-931cfc308afa.png" width="500" >
+<img src="https://user-images.githubusercontent.com/5656118/99027398-b57fa000-259f-11eb-90e9-931cfc308afa.png" width="800" >
 
 - Với Android, bạn chọn file main để chạy tương ứng:
 <img src="https://user-images.githubusercontent.com/5656118/99027445-d8aa4f80-259f-11eb-8e80-6eca6791eea0.png" width="300" >
